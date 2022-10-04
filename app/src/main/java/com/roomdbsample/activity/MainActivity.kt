@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getUpdateUserResponse().observe(this, Observer {
 
             it?.let {
-                    Log.e("infoUpdates",it.toString())
+                    Log.e("infoUpdatess",it.toString())
             }
 
 
