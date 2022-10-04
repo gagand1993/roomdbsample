@@ -1,26 +1,24 @@
 package com.roomdbsample.viewmodel
 
 import android.content.Context
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.roomdbsample.roomhelper.database.UserDatabase
-import com.roomdbsample.roomhelper.entity.User
+import com.roomdbsample.roomhelper.database.NotesDatabase
+import com.roomdbsample.roomhelper.entity.Notes
 import kotlinx.coroutines.*
 import java.util.*
 
 class MainViewModel(val context: Context) :ViewModel(){
 
 
-    var name=ObservableField("")
-    var phone=ObservableField("")
+    var title=ObservableField("")
+    var description=ObservableField("")
 
-    fun addUserClick(view: View){
-        getInsertUserDataRequest(User(0, name = name.get().toString(), phone = phone.get().toString(), Date(),
+    fun addNotesData(){
+        getInsertUserDataRequest(Notes(0, title = title.get().toString(), description = description.get().toString(), Date(),
             Date()
         ))
     }
@@ -29,7 +27,7 @@ class MainViewModel(val context: Context) :ViewModel(){
         GlobalScope.launch(Dispatchers.Main) {
 
             val job=   GlobalScope.launch (Dispatchers.Main) {
-                UserDatabase.getDatabaseInstance(context).userDao().updateInfo(name.get().toString(),Date(), 1)
+                NotesDatabase.getDatabaseInstance(context).userDao().updateInfo(title.get().toString(),Date(), 1)
 
             }
             job.join()
@@ -40,9 +38,9 @@ class MainViewModel(val context: Context) :ViewModel(){
     }
 
 
-    private val addUserMutableLiveData = MutableLiveData<User>()
+    private val addUserMutableLiveData = MutableLiveData<String>()
 
-    fun getAddUserResponse(): LiveData<User> {
+    fun getAddUserResponse(): LiveData<String> {
         return addUserMutableLiveData
     }
 
@@ -54,14 +52,14 @@ class MainViewModel(val context: Context) :ViewModel(){
         return updateUserMutableLiveData
     }
 
-    private fun getInsertUserDataRequest(user:User){
-        GlobalScope.launch {
-            val job =  GlobalScope.launch(Dispatchers.Main) {
-                UserDatabase.getDatabaseInstance(context).userDao().insert(user)
+    private fun getInsertUserDataRequest(user:Notes){
+        GlobalScope.launch(Dispatchers.Main) {
+            val job =  GlobalScope.async (Dispatchers.Main) {
+                NotesDatabase.getDatabaseInstance(context).userDao().insert(user)
             }
 
-            job.join()
-            getAllUserDataRequest()
+            job.await()
+             addUserMutableLiveData.value="Add Notes"
         }
 
 
@@ -70,9 +68,9 @@ class MainViewModel(val context: Context) :ViewModel(){
 
 
 
-    private val singleUserMutableLiveData = MutableLiveData<User?>()
+    private val singleUserMutableLiveData = MutableLiveData<Notes?>()
 
-    fun getSingleUserResponse(): LiveData<User?> {
+    fun getSingleUserResponse(): LiveData<Notes?> {
         return singleUserMutableLiveData
     }
 
@@ -81,9 +79,9 @@ class MainViewModel(val context: Context) :ViewModel(){
         GlobalScope.launch(Dispatchers.Main) {
 
 
-            var user:User?=null
+            var user:Notes?=null
             val job=  GlobalScope.launch (Dispatchers.IO) {
-                user=  UserDatabase.getDatabaseInstance(context).userDao().getSingleUser(id)
+                user=  NotesDatabase.getDatabaseInstance(context).userDao().getSingleUser(id)
 
             }
             job.join()
@@ -92,24 +90,24 @@ class MainViewModel(val context: Context) :ViewModel(){
         }
     }
 
-    private val allUserMutableLiveData = MutableLiveData<List<User?>>()
+    private val allUserMutableLiveData = MutableLiveData<List<Notes?>>()
 
-    fun getAllUserResponse(): LiveData<List<User?>> {
+    fun getAllUserResponse(): LiveData<List<Notes?>> {
         return allUserMutableLiveData
     }
     fun getAllUserDataRequest(){
         GlobalScope.launch(Dispatchers.Main) {
-            val user = UserDatabase.getDatabaseInstance(context).userDao().getAllUser()
+            val user = NotesDatabase.getDatabaseInstance(context).userDao().getAllUser()
             allUserMutableLiveData.value=user
             allUserMutableLiveData.value=null
 
         }
     }
 
-    fun deleteUserDataWithUserId(user:User){
+    fun deleteUserDataWithUserId(user:Notes){
         GlobalScope.launch {
             val job =  GlobalScope.launch(Dispatchers.Main) {
-                UserDatabase.getDatabaseInstance(context).userDao().deleteUser(user.id)
+                NotesDatabase.getDatabaseInstance(context).userDao().deleteUser(user.id)
             }
             job.join()
             getAllUserDataRequest()

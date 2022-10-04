@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
          <variable
@@ -9,67 +10,78 @@
              type="com.roomdbsample.viewmodel.MainViewModel" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".activity.MainActivity">
 
-        <EditText
-            android:id="@+id/et_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Enter name"
-            android:padding="12dp"
-            android:text="@={mainviewmodel.name}"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_header"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <EditText
-            android:id="@+id/et_phone"
-            android:layout_width="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/et_name"
-            android:layout_height="wrap_content"
-            android:hint="Enter phone"
-            android:padding="12dp"
-            android:layout_marginTop="10dp"
-            android:text="@={mainviewmodel.phone}"
-            android:layout_marginHorizontal="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"  />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="100dp"
+            android:background="@color/black"
+            android:layout_width="0dp">
 
-        <Button
-            android:id="@+id/btn_add"
-            android:onClick="@{(view)->mainviewmodel.addUserClick(view)}"
-            android:text="@string/add_user"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/et_phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-        <Button
-            android:id="@+id/btn_update"
-            android:onClick="@{(view)->mainviewmodel.updateUserClick(view)}"
-            android:text="@string/update"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="20dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="45dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_user_list"
-            android:layout_width="match_parent"
+            android:id="@+id/rv_notes"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_update"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/section_header"/>
 
+        <ImageView
+            android:id="@+id/iv_empty"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_empty"
+            app:layout_constraintTop_toTopOf="@+id/section_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

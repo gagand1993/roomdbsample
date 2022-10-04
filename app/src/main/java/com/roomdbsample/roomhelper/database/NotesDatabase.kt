@@ -6,25 +6,25 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.roomdbsample.other.ConverterHelper
-import com.roomdbsample.roomhelper.dao.UserDao
-import com.roomdbsample.roomhelper.entity.User
+import com.roomdbsample.roomhelper.dao.NotesDao
+import com.roomdbsample.roomhelper.entity.Notes
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [Notes::class], version = 1)
 @TypeConverters(ConverterHelper::class)
-abstract class UserDatabase :RoomDatabase(){
+abstract class NotesDatabase :RoomDatabase(){
 
-    abstract fun userDao():UserDao
+    abstract fun userDao():NotesDao
 
     companion object{
 
         @Volatile
-        private var INSTANCE:UserDatabase?=null
+        private var INSTANCE:NotesDatabase?=null
 
-        fun getDatabaseInstance(context:Context):UserDatabase{
+        fun getDatabaseInstance(context:Context):NotesDatabase{
             if (INSTANCE==null){
                 synchronized(this){
                     INSTANCE= Room.databaseBuilder(context.applicationContext,
-                        UserDatabase::class.java,"RoomDbSample")
+                        NotesDatabase::class.java,"NotesDB")
                         .build()
                 }
             }

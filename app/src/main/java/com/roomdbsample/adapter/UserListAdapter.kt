@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.roomdbsample.R
 import com.roomdbsample.databinding.RowUserBinding
 import com.roomdbsample.other.CallbackHelper
-import com.roomdbsample.roomhelper.entity.User
+import com.roomdbsample.roomhelper.entity.Notes
 import java.util.*
 
 
 class UserListAdapter(val callback: CallbackHelper): RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
-    var list=ArrayList<User>()
+    var list=ArrayList<Notes>()
 
     class ViewHolder(var binding: RowUserBinding):RecyclerView.ViewHolder(binding.root) {
 
@@ -24,15 +24,15 @@ class UserListAdapter(val callback: CallbackHelper): RecyclerView.Adapter<UserLi
         return ViewHolder(binding)
     }
 
-    fun updateList(list:ArrayList<User>){
+    fun updateList(list:ArrayList<Notes>){
         this.list=list
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.binding.tvName.text=list[position].name
-        holder.binding.tvPhone.text=list[position].phone
+        holder.binding.tvName.text=list[position].title
+        holder.binding.tvPhone.text=list[position].description
 
         holder.binding.ivDelete.setOnClickListener {
             callback.clickHandler(list[position])

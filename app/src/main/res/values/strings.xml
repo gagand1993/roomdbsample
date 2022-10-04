@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">RoomDbSample</string>
+    <string name="app_name">Notes</string>
     <string name="add_user">Add User</string>
     <string name="update">Update</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>

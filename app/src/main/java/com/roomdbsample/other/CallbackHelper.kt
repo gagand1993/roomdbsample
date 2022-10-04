@@ -1,7 +1,7 @@
 package com.roomdbsample.other
 
-import com.roomdbsample.roomhelper.entity.User
+import com.roomdbsample.roomhelper.entity.Notes
 
 interface CallbackHelper {
-    fun clickHandler(user: User)
+    fun clickHandler(user: Notes)
 }
