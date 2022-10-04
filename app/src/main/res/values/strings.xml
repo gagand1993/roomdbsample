@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RoomDbSample</string>
+    <string name="add_user">Add User</string>
+    <string name="update">Update</string>
+</resources>
