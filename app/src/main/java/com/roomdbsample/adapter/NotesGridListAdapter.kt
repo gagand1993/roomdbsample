@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.roomdbsample.R
-import com.roomdbsample.databinding.RowNotesListBinding
+import com.roomdbsample.databinding.RowNotesGridBinding
 import com.roomdbsample.roomhelper.entity.Notes
 import java.util.*
 
 
-class NotesListAdapter(var list:ArrayList<Notes>): RecyclerView.Adapter<NotesListAdapter.ViewHolder>() {
+class NotesGridListAdapter(var list:ArrayList<Notes>): RecyclerView.Adapter<NotesGridListAdapter.ViewHolder>() {
 
     var onItemClickListener: ((notes:Notes) -> Unit)? = null
-    class ViewHolder(var binding: RowNotesListBinding):RecyclerView.ViewHolder(binding.root) {}
+    class ViewHolder(var binding: RowNotesGridBinding):RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding=DataBindingUtil.inflate<RowNotesListBinding>(LayoutInflater.from(parent.context), R.layout.row_notes_list,parent,false)
+        val binding=DataBindingUtil.inflate<RowNotesGridBinding>(LayoutInflater.from(parent.context), R.layout.row_notes_grid,parent,false)
         return ViewHolder(binding)
     }
 

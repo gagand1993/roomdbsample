@@ -12,8 +12,8 @@ interface NotesDao {
     @Insert
     suspend fun insert(user:Notes)
 
-    @Query("UPDATE notes SET title=:nameValue,updatedAt=:updatedAtValue WHERE id=:id")
-    suspend fun updateInfo(nameValue:String,updatedAtValue:Date,id:Long)
+    @Query("UPDATE notes SET title=:titleValue,description=:descriptionValue,backgroundType=:backgroundTypeValue,background=:backgroundValue,updatedAt=:updatedAtValue WHERE id=:id")
+    suspend fun updateInfo(titleValue:String,descriptionValue:String,backgroundTypeValue:String,backgroundValue:String,updatedAtValue:Date,id:Long)
 
     @Query("DELETE FROM notes WHERE id = :id")
     suspend fun deleteUser(id:Long)

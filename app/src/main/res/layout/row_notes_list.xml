@@ -8,45 +8,52 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        >
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cl_root"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="0dp"
+            app:cardCornerRadius="5dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@android:color/darker_gray">
+             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_title"
                     android:layout_width="0dp"
-                    android:text="hello"
                     android:textSize="17dp"
-                    android:padding="12dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
+                     android:padding="12dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <TextView
-                    android:id="@+id/tv_phone"
+                    android:id="@+id/tv_description"
                     android:layout_width="0dp"
-                    android:text="51845"
                     android:textSize="17dp"
-                    android:padding="12dp"
-                    android:gravity="center"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    android:paddingBottom="12dp"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/white"
+
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/iv_delete"
                     android:padding="5dp"
                     android:layout_margin="10dp"

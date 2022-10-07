@@ -10,7 +10,9 @@ data class Notes(
     var id:Long,
     var title:String,
     var description:String,
+    var backgroundType:String,
+    var background:String,
     var createdAt:Date,
     var updatedAt:Date
 
-)
+):java.io.Serializable

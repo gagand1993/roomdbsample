@@ -17,17 +17,17 @@ class MainViewModel(val context: Context) :ViewModel(){
     var title=ObservableField("")
     var description=ObservableField("")
 
-    fun addNotesData(){
-        getInsertUserDataRequest(Notes(0, title = title.get().toString(), description = description.get().toString(), Date(),
+    fun addNotesData(backgroundType:String ,backgroundColor:String ){
+        getInsertUserDataRequest(Notes(0, title = title.get().toString(), description = description.get().toString(),backgroundType,backgroundColor, Date(),
             Date()
         ))
     }
 
-    fun updateUserClick(view: View){
+    fun updateUserClick(id:Long,backgroundType: String,background: String){
         GlobalScope.launch(Dispatchers.Main) {
 
             val job=   GlobalScope.launch (Dispatchers.Main) {
-                NotesDatabase.getDatabaseInstance(context).userDao().updateInfo(title.get().toString(),Date(), 1)
+                NotesDatabase.getDatabaseInstance(context).userDao().updateInfo(title.get().toString(),description.get().toString(),backgroundType,background,Date(), id)
 
             }
             job.join()
